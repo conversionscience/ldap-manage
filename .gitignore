@@ -25,3 +25,13 @@ build/Release
 # Dependency directory
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
 node_modules
+
+# compiled assets
+public/stylesheets/*.css
+public/javascripts/*.js
+
+# local config
+config_local.json
+
+# session files
+tmp/sessions/*.json

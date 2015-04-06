@@ -1,0 +1,57 @@
+{
+  "ldap": {
+    "server": {
+      "uri": "ldap:///",
+      "binddn": "cn=Manager,dc=domain,dc=com",
+      "password": "secret",
+      "version": 3
+    },
+    "schema": {
+      "people": "ou=People,dc=domain,dc=com",
+      "name": "cn=%s",
+      "filter": "(cn=%s)"
+    }
+  },
+  "sessions": {
+    "secret": "secret",
+    "name": "ssid"
+  },
+  "api": {
+    "mountpoint": "/api"
+  },
+  "assets": {
+    "less": {
+      "dest": "public",
+      "render": {
+        "compress": false
+      }
+    },
+    "js": {
+      "dest": "public",
+      "src": "assets/javascripts",
+      "files": {
+        "/javascripts/vendor.js": {
+          "recompile": false,
+          "require": {
+            "angular": "angular",
+            "angular-resource": "angular-resource",
+            "angular-bootstrap": "angular-bootstrap",
+            "angular-ui-router": "angular-ui-router",
+            "lodash": "lodash"
+          }
+        },
+        "/javascripts/app.js": {
+          "files": [
+            "app.js"
+          ],
+          "external": [
+            "angular",
+            "angular-resource",
+            "angular-bootstrap",
+            "lodash"
+          ]
+        }
+      }
+    }
+  }
+}
