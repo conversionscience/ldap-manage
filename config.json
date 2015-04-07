@@ -36,7 +36,9 @@
             "angular-resource": "angular-resource",
             "angular-bootstrap": "angular-bootstrap",
             "angular-ui-router": "angular-ui-router",
-            "lodash": "lodash"
+            "angular-animate": "angular-animate",
+            "lodash": "lodash",
+            "jquery": "jquery"
           }
         },
         "/javascripts/app.js": {
@@ -48,7 +50,9 @@
             "angular-resource",
             "angular-bootstrap",
             "angular-ui-router",
-            "lodash"
+            "angular-animate",
+            "lodash",
+            "jquery"
           ]
         }
       }

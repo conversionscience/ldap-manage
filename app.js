@@ -83,7 +83,7 @@ app.use(function(err, req, res, cb) {
     res.json(_.pick({
       code: res.statusCode,
       message: err.message,
-      explanation: _.isEmpty(err) ? false : err
+      details: _.isEmpty(err) ? false : err
     }, _.identity));
   } else {
     res.send(err.toString());

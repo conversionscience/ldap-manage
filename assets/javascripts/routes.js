@@ -9,5 +9,10 @@ module.exports = ['$stateProvider', '$urlRouterProvider',
       url: '/',
       templateUrl: 'templates/auth.html',
       controller: 'AuthCtrl'
+    })
+    .state('home', {
+      url: '/home',
+      templateUrl: 'templates/home.html',
+      controller: 'HomeCtrl'
     });
 }];
