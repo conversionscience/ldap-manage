@@ -31,7 +31,6 @@
       "src": "assets/javascripts",
       "files": {
         "/javascripts/vendor.js": {
-          "recompile": false,
           "require": {
             "angular": "angular",
             "angular-resource": "angular-resource",
@@ -48,6 +47,7 @@
             "angular",
             "angular-resource",
             "angular-bootstrap",
+            "angular-ui-router",
             "lodash"
           ]
         }

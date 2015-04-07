@@ -1,10 +1,10 @@
 doctype html
-html
+html(ng-app='app')
   head
     title= 'LDAP Manage'
     link(rel='stylesheet', href='/stylesheets/vendor.css')
     link(rel='stylesheet', href='/stylesheets/app.css')
-    script(src='/javascripts/vendor.js')
-    script(src='/javascripts/app.js')
   body
-      div(ui-view="")
+      div(ui-view='')
+      script(src='/javascripts/vendor.js')
+      script(src='/javascripts/app.js')
