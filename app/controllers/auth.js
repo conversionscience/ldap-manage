@@ -43,7 +43,6 @@ function login(req, res, cb) {
       cb(error(401, {'password': ['is not correct']}));
     } else {
       req.session.user = username;
-      console.log(user);
       res.json(user).end();
     }
   });

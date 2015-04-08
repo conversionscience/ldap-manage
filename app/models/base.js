@@ -53,9 +53,7 @@ function decode(obj) {
 }
 
 function list(query, limit, cookie, cb) {
-  console.log('list');
   /*jshint validthis:true */
-
   var that = this,
       filter = lfilter.and([
         this.filter,
@@ -64,7 +62,6 @@ function list(query, limit, cookie, cb) {
         }.bind(null, lfilter.escape(query))))
       ]);
 
-  console.log(filter);
   $$.waterfall([
     connection.search.bind(connection, _.pick({
       base: this.dn,
