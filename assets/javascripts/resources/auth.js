@@ -3,7 +3,16 @@ module.exports = ['$http', '$q', 'Config', function($http, $q, Config) {
 
   var url = Config.api.path + '/auth',
       user = $q.defer(),
-      Auth = function() { };
+      Auth = function() {
+        $http
+          .get(url)
+          .success(function(data) {
+            user.resolve(data);
+          })
+          .error(function(data) {
+            user.reject(data.details);
+          });
+      };
 
   Auth.prototype.user = function() {
     return user.promise;
@@ -31,19 +40,6 @@ module.exports = ['$http', '$q', 'Config', function($http, $q, Config) {
       })
       .error(function() {
         user.resolve();
-      });
-    return user.promise;
-  };
-
-  Auth.prototype.get = function() {
-    user = $q.defer();
-    $http
-      .get(url)
-      .success(function(data) {
-        user.resolve(data);
-      })
-      .error(function(data) {
-        user.reject(data.details);
       });
     return user.promise;
   };

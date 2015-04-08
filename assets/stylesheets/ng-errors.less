@@ -1,19 +1,37 @@
 @keyframes shake {
-  0% {transform: translateX(0);}
-  12.5% {transform: translateX(-6px) rotateY(-5deg)}
-  37.5% {transform: translateX(5px) rotateY(4deg)}
-  62.5% {transform: translateX(-3px) rotateY(-2deg)}
-  87.5% {transform: translateX(2px) rotateY(1deg)}
-  100% {transform: translateX(0)}
+  8%, 41% {
+    transform: translateX(-10px);
+  }
+  25%, 58% {
+    transform: translateX(10px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+  92% {
+    transform: translateX(5px);
+  }
+  0%, 100% {
+    transform: translateX(0);
+  }
 }
 
 @-webkit-keyframes shake {
-  0% {transform: translateX(0)}
-  12.5% {transform: translateX(-12px) rotateY(-10deg)}
-  37.5% {transform: translateX(10px) rotateY(8deg)}
-  62.5% {transform: translateX(-6px) rotateY(-4deg)}
-  87.5% {transform: translateX(4px) rotateY(2deg)}
-  100% {transform: translateX(0)}
+  8%, 41% {
+    -webkit-transform: translateX(-10px);
+  }
+  25%, 58% {
+    -webkit-transform: translateX(10px);
+  }
+  75% {
+    -webkit-transform: translateX(-5px);
+  }
+  92% {
+    -webkit-transform: translateX(5px);
+  }
+  0%, 100% {
+    -webkit-transform: translateX(0);
+  }
 }
 
 .shake {

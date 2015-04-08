@@ -1,0 +1,9 @@
+<div class="col-md-2 users-list">
+  <h1>Users</h1>
+  <ul>
+    <li ng-repeat="user in users">
+      <a href="" ui-sref="users.show({username: user.username})">{{ user.firstname }} {{ user.lastname }}</a>
+    </li>
+  </ul>
+</div>
+<div class="col-md-10 users-page" ui-view=""></div>

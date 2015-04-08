@@ -17,7 +17,6 @@ module.exports = function(root, options) {
   var src = path.join(root, options.src);
 
   function compile(file, options, cb) {
-    console.log('compile');
     var b = browserify({
           basedir: src,
           paths: src
@@ -27,7 +26,12 @@ module.exports = function(root, options) {
     b.add(options.files);
     b.external(options.external);
 
-    _.each(options.require, function(req, name) {
+    _.each(options.require, function(name, req) {
+      // workaround for broken import by name
+      // convert to local path
+      if (req[0] !== '.' && req[0] !== '/')
+        req = '../../node_modules/' + req;
+
       b.require(req, {
         expose: name
       });

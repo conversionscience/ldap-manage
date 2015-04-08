@@ -1,0 +1,85 @@
+<h1>{{ user.firstname }} {{ user.lastname }}</h1>
+
+<form role="form" ng-errors="errors" ng-submit="save()" class="row">
+  <div class="col-md-8">
+    <accordion close-others="true">
+      <accordion-group heading="Common attributes">
+        <div class="form-group">
+          <label for="user.username" class="control-label">User name</label>
+          <input id="user.username" type="text" ng-model="user.username" class="form-control" placeholder="User name">
+        </div>
+        <div class="form-group">
+          <label for="user.firstname" class="control-label">First name</label>
+          <input id="user.firstname" type="text" ng-model="user.firstname" class="form-control" placeholder="First name">
+        </div>
+        <div class="form-group">
+          <label for="user.lastname" class="control-label">Last name</label>
+          <input id="user.lastname" type="text" ng-model="user.lastname" class="form-control" placeholder="Last name">
+        </div>
+        <div class="form-group">
+          <label for="user.mail" class="control-label">Email</label>
+          <input id="user.mail" type="text" ng-model="user.mail" class="form-control" placeholder="Email">
+        </div>
+        <div class="form-group">
+          <label for="user.phone" class="control-label">Phone</label>
+          <input id="user.phone" type="text" ng-model="user.phone" class="form-control" placeholder="Phone">
+        </div>
+      </accordion-group>
+      <accordion-group heading="Password" is-open="true">
+        <div class="form-group">
+          <label for="user.password" class="control-label">Password</label>
+          <input id="user.password" type="text" ng-model="user.password" class="form-control" placeholder="Password">
+        </div>
+        <div class="form-group">
+          <label for="password" class="control-label">Confirm password</label>
+          <input id="password" type="text" ng-model="password" class="form-control" placeholder="Confirm password">
+        </div>
+        <p>Leave fields blank to keep current password</p>
+      </accordion-group>
+
+      <accordion-group heading="Unix attributes">
+        <div class="form-group">
+          <label for="user.uid" class="control-label">Username</label>
+          <input id="user.uid" type="text" ng-model="user.uid" class="form-control" placeholder="Password">
+        </div>
+
+        <div class="row">
+          <div class="col-md-8">
+            <div class="form-group">
+              <label for="user.home" class="control-label">Home directory</label>
+              <input id="user.home" type="text" ng-model="user.home" class="form-control" placeholder="Home directory">
+            </div>
+            <div class="form-group">
+              <label for="user.shell" class="control-label">Shell</label>
+              <select id="user.shell" ng-model="user.shell" class="form-control" ng-options="value for value in shells">
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="user.uidNumber" class="control-label">UID</label>
+              <input id="user.uidNumber" type="number" ng-model="user.uidNumber" class="form-control" placeholder="UID">
+            </div>
+            <div class="form-group">
+              <label for="user.gidNumber" class="control-label">GID</label>
+              <input id="user.gidNumber" type="number" ng-model="user.gidNumber" class="form-control" placeholder="GID">
+            </div>
+          </div>
+        </div>
+      </accordion-group>
+      <accordion-group heading="Unix groups" is-open="groupsOpen">
+      </accordion-group>
+
+    </accordion>
+    <button type="submit" class="btn btn-primary">Save</button>
+  </div>
+  <div class="col-md-3 col-md-offset-1">
+    <div class="user-photo" ng-show="user.photo">
+      <img ng-src="data:image/jpeg;base64,{{ user.photo }}" />
+    </div>
+    <div ng-file-reader on-readed="photo(event, file)" read-method="'readAsDataURL'" accept="jpg,jpeg"></div>
+    <p>Please use up to {{ maxsize }}×{{ maxsize }}px JPEG images.
+       Bigger images will be downscaled automatically.</p>
+  </div>
+</form>
+

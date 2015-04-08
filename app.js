@@ -2,42 +2,27 @@
 
 var express      = require('express'),
     _            = require('lodash'),
-    LDAP         = require('LDAP'),
     error        = require('http-errors'),
     path         = require('path'),
     logger       = require('morgan'),
-    extend       = require('extend'),
     cookieParser = require('cookie-parser'),
     bodyParser   = require('body-parser'),
     session      = require('express-session'),
     sfstore      = require('session-file-store'),
     less         = require('less-middleware'),
-    js           = require('./lib/middleware/js'),
-    auth         = require('./lib/middleware/auth'),
-    routes       = {
-                     root: require('./routes/root'),
-                     api: require('./routes/api')
-                   },
-    config       = require('./config.json'),
+    js           = require('./app/middleware/js'),
+    auth         = require('./app/middleware/auth'),
+    json         = require('./app/middleware/json'),
+    routesRoot   = require('./app/routes/root'),
+    routesApi    = require('./app/routes/api'),
+    config       = require('./app/config'),
     app          = express();
 
-try {
-  extend(true, config, require('./config_local.json'));
-} catch(e) {}
-
-try {
-  extend(true, config, require('/etc/ldap-manager/config.json'));
-} catch(e) {}
-
-var ldap = new LDAP(config.ldap.server);
-ldap.open(function(err) {
-  if (err) throw err;
-});
-
-app.set('config', config);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+
 app.use(logger('dev'));
+
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(session({
@@ -64,14 +49,12 @@ if (app.get('env') === 'development') {
     express.static(path.join(__dirname, 'assets/templates')));
 }
 
-app.use(auth({
-  ldap: ldap,
-  base: config.ldap.schema.people,
-  filter: config.ldap.schema.filter
-}));
+app.use('/', routesRoot);
 
-app.use('/', routes.root);
-app.use(config.api.mountpoint, routes.api);
+// the rest is api so authentication and json middlewares are applied here
+app.use(auth);
+app.use(json);
+app.use(config.api.mountpoint, routesApi);
 
 app.use(function(req, res, next) {
   next(error(404));

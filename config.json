@@ -1,15 +1,174 @@
 {
   "ldap": {
+    "dc": "dc=domain,dc=com",
+    "limit": 25,
     "server": {
       "uri": "ldap:///",
-      "binddn": "cn=Manager,dc=domain,dc=com",
+      "binddn": "cn=Manager",
       "password": "secret",
       "version": 3
     },
     "schema": {
-      "people": "ou=People,dc=domain,dc=com",
-      "name": "cn=%s",
-      "filter": "(cn=%s)"
+      "auth": {
+        "dn": "ou=People",
+        "filter": "(&(cn=%s)(employeeType=admin))"
+      },
+      "people": {
+        "dn": "ou=People",
+        "name": "cn=%s",
+        "filter": "(objectClass=person)",
+        "list_attrs": "cn,givenName,sn,employeeType",
+        "requiredClasses": [
+          "top",
+          "inetOrgPerson"
+        ],
+        "searchAttrs": [
+          "cn",
+          "givenName",
+          "sn"
+        ],
+        "transform": [
+          [
+            "givenName",
+            "firstname",
+            "string",
+            true,
+            true
+          ],
+          [
+            "sn",
+            "lastname",
+            "string",
+            true,
+            true
+          ],
+          [
+            "uid",
+            "uid",
+            "string",
+            true,
+            true
+          ],
+          [
+            "cn",
+            "username",
+            "string",
+            true,
+            true
+          ],
+          [
+            "uidNumber",
+            "uidNumber",
+            "integer",
+            true,
+            true
+          ],
+          [
+            "gidNumber",
+            "gidNumber",
+            "integer",
+            true,
+            true
+          ],
+          [
+            "homeDirectory",
+            "home",
+            "string",
+            true,
+            true
+          ],
+          [
+            "loginShell",
+            "shell",
+            "string",
+            true,
+            true
+          ],
+          [
+            "employeeType",
+            "roles",
+            "string",
+            false,
+            true
+          ],
+          [
+            "jpegPhoto",
+            "photo",
+            "buffer",
+            true,
+            true
+          ],
+          [
+            "mobile",
+            "phone",
+            "string",
+            true,
+            true
+          ],
+          [
+            "mail",
+            "mail",
+            "string",
+            true,
+            true
+          ],
+          [
+            "postalAddress",
+            "address",
+            "string",
+            true,
+            true
+          ],
+          [
+            "description",
+            "description",
+            "string",
+            true,
+            true
+          ],
+          [
+            "userPassword",
+            "password",
+            "string",
+            true,
+            false
+          ]
+        ],
+        "defaultGroups": []
+      },
+      "group": {
+        "dn": "ou=Group",
+        "name": "cn=%s",
+        "filter": "(objectClass=posixGroup)",
+        "list_attrs": "cn",
+        "requiredClasses": [
+          "top",
+          "inetOrgPerson"
+        ],
+        "transform": [
+          [
+            "cn",
+            "groupname",
+            "string",
+            true,
+            true
+          ],
+          [
+            "gidNumber",
+            "gidNumber",
+            "integer",
+            true,
+            true
+          ],
+          [
+            "description",
+            "description",
+            "string",
+            true,
+            true
+          ]
+        ]
+      }
     }
   },
   "sessions": {
@@ -17,7 +176,8 @@
     "name": "ssid"
   },
   "api": {
-    "mountpoint": "/api"
+    "mountpoint": "/api",
+    "list_cookie": "x-list-cookie"
   },
   "assets": {
     "less": {
@@ -37,6 +197,7 @@
             "angular-bootstrap": "angular-bootstrap",
             "angular-ui-router": "angular-ui-router",
             "angular-animate": "angular-animate",
+            "ngFileReader": "angular-filereader",
             "lodash": "lodash",
             "jquery": "jquery"
           }
@@ -51,6 +212,7 @@
             "angular-bootstrap",
             "angular-ui-router",
             "angular-animate",
+            "angular-filereader",
             "lodash",
             "jquery"
           ]
